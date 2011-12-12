@@ -20,8 +20,8 @@
         // set placeholder values
         $placeholders.each(function () {
             var $this = $(this);
-            
-            if (!$this.val()) {
+
+            if (!$this.val() || $this.val() === $this.attr('placeholder')) {
                 $this.addClass(placeholderClass).val($this.attr('placeholder'));
             }
         });
@@ -61,4 +61,3 @@
         });
     }
 })(jQuery);
-
