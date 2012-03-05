@@ -14,39 +14,35 @@
     }
  
     Placeholder.prototype.init = function () {
-        var $placeholders = $(this.element).find('[placeholder]'),
-            placeholderClass = this.options.placeholderClass;
-        
-        // set placeholder values
-        $placeholders.each(function () {
-            var $this = $(this);
+        var placeholderClass = this.options.placeholderClass,        
+           	$this = $(this.element);
 
-            if (!$this.val() || $this.val() === $this.attr('placeholder')) {
+        if (!$this.val() || $this.val() === $this.attr('placeholder')) {
                 $this.addClass(placeholderClass).val($this.attr('placeholder'));
             }
         });
 
         // focus and blur of placeholders
-        $placeholders.focus(function () {
-            var $this = $(this);
-            if ($this.val() === $this.attr('placeholder')) {
-                $this.val('');
-                $this.removeClass(placeholderClass);
+        $this.focus(function () {
+            var $self = $(this);
+            if ($self.val() === $self.attr('placeholder')) {
+                $self.val('');
+                $self.removeClass(placeholderClass);
             }
         }).blur(function () {
-            var $this = $(this);
-            if ($this.val() === '' || $this.val() === $this.attr('placeholder')) {
-                $this.val($this.attr('placeholder'));
-                $this.addClass(placeholderClass);
+            var $self = $(this);
+            if ($self.val() === '' || $self.val() === $self.attr('placeholder')) {
+                $self.val($this.attr('placeholder'));
+                $self.addClass(placeholderClass);
             }
         });
 
         // remove placeholders on submit
-        $placeholders.closest('form').submit(function () {
-            $placeholders.each(function () {
-                var $this = $(this);
-                if ($this.val() == $this.attr('placeholder')) {
-                    $this.val('');
+        $this.closest('form').submit(function () {
+            $this.each(function () {
+                var $self = $(this);
+                if ($self.val() == $self.attr('placeholder')) {
+                    $self.val('');
                 }
             });
         });
